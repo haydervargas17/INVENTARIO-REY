@@ -26,6 +26,9 @@ build/
 *.log
 logs/
 
+# Local integration scripts with embedded credentials
+cloudinary_integration_test.py
+
 # OS / editor
 .DS_Store
 Thumbs.db
