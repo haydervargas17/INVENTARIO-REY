@@ -18,7 +18,33 @@ Completado:
 
 Siguiente objetivo:
 
-- Implementar base del backend FastAPI con configuracion, conexion a Neon, SQLAlchemy y Alembic.
+- Implementar modelos SQLAlchemy y primera migracion Alembic del modulo de calzado.
+
+## Backend local
+
+Instalar dependencias:
+
+```powershell
+python -m pip install -r requirements.txt
+```
+
+Ejecutar API local:
+
+```powershell
+python -m uvicorn backend.app.main:app --reload
+```
+
+Endpoints base:
+
+- `GET /`
+- `GET /api/v1/health`
+- `GET /api/v1/health/database`
+
+Verificar Alembic:
+
+```powershell
+python -m alembic current
+```
 
 ## Documentacion
 

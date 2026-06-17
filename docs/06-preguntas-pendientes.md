@@ -118,4 +118,4 @@ No hay preguntas de negocio pendientes para el modulo inicial de inventario de c
 
 ## Siguiente objetivo recomendado
 
-Implementar la base del backend FastAPI con configuracion, conexion a Neon, SQLAlchemy y Alembic.
+Implementar modelos SQLAlchemy y primera migracion Alembic del modulo de calzado.

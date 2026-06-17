@@ -40,10 +40,11 @@ Estado:
 - Proyecto vinculado: `haydervargas17s-projects/inventario-rey`.
 - GitHub conectado al proyecto de Vercel.
 - Variables principales cargadas en Production.
+- FastAPI expone una instancia `app` en `app.py`, compatible con la deteccion de Vercel.
 
 Pendiente:
 
-- Validar despliegue real cuando exista backend/frontend implementado.
+- Validar despliegue real del backend base.
 - Completar variables de Preview si se decide usar despliegues de ramas antes de produccion.
 
 ## Neon PostgreSQL
