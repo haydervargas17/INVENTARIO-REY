@@ -24,42 +24,46 @@ FRONTEND_URL=
 
 ## GitHub
 
-Pendiente para conectar:
+Estado:
 
-- Definir nombre del repositorio.
-- Definir si sera privado o publico.
-- Iniciar sesion en GitHub desde esta maquina.
-- Crear el repositorio remoto.
-- Vincular el remoto con el repositorio local.
+- Repositorio creado: `INVENTARIO-REY`.
+- Visibilidad: publico.
+- Remoto local configurado: `https://github.com/haydervargas17/INVENTARIO-REY.git`.
+- Rama principal: `main`.
 
 ## Vercel
 
-Pendiente para conectar:
+Estado:
 
-- Instalar o ejecutar Vercel CLI.
-- Iniciar sesion con la cuenta de Vercel.
-- Vincular el proyecto local.
-- Configurar variables de entorno en Vercel.
-- Validar despliegue de funciones Python compatibles con ASGI para FastAPI.
+- Vercel CLI instalado.
+- Sesion iniciada con la cuenta `haydervargas17`.
+- Proyecto vinculado: `haydervargas17s-projects/inventario-rey`.
+- GitHub conectado al proyecto de Vercel.
+- Variables principales cargadas en Production.
+
+Pendiente:
+
+- Validar despliegue real cuando exista backend/frontend implementado.
+- Completar variables de Preview si se decide usar despliegues de ramas antes de produccion.
 
 ## Neon PostgreSQL
 
-Pendiente para conectar:
+Estado:
 
-- Crear proyecto en Neon.
-- Crear base de datos inicial.
-- Obtener `DATABASE_URL`.
-- Guardar `DATABASE_URL` en `.env` local y variables de entorno de Vercel.
+- Proyecto/base de datos creada.
+- `DATABASE_URL` guardado en `.env` local.
+- Conexion local probada correctamente.
+- Vercel tiene variables de Neon creadas por la integracion.
 
 ## Cloudinary
 
-Pendiente para conectar:
+Estado:
 
-- Crear cuenta o usar cuenta existente de Cloudinary.
-- Obtener `CLOUDINARY_CLOUD_NAME`.
-- Obtener `CLOUDINARY_API_KEY`.
-- Obtener `CLOUDINARY_API_SECRET`.
-- Guardar credenciales en `.env` local y variables de entorno de Vercel.
+- Credenciales guardadas en `.env` local.
+- SDK Python instalado localmente.
+- Subida de imagen de prueba ejecutada correctamente.
+- URL optimizada generada correctamente.
+- Variables cargadas en Vercel Production.
 
 ## Regla de seguridad
 

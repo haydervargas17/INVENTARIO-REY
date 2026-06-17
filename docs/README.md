@@ -10,7 +10,9 @@ Etapa actual del proyecto:
 
 1. Analisis del requerimiento.
 2. Diseno inicial de la solucion.
-3. Definicion preliminar de datos, API e interfaz.
+3. Definicion de datos, API e interfaz.
+4. Diseno definitivo de base de datos del modulo de calzado.
+5. Preparacion inicial de estructura del repositorio.
 
 No se ha iniciado implementacion de codigo porque el flujo oficial del proyecto exige documentar y disenar antes de programar.
 
@@ -28,6 +30,8 @@ La fuente principal de requisitos es el documento entregado por el usuario:
 - [04-api.md](04-api.md): diseno preliminar de endpoints, respuestas y errores.
 - [05-interfaz.md](05-interfaz.md): pantallas iniciales, flujo de usuario y componentes.
 - [06-preguntas-pendientes.md](06-preguntas-pendientes.md): decisiones confirmadas y dudas restantes antes de programar.
+- [07-integraciones.md](07-integraciones.md): cuentas, servicios externos y variables de entorno.
+- [08-diseno-base-datos.md](08-diseno-base-datos.md): esquema definitivo de PostgreSQL para el modulo de calzado.
 
 ## Regla de trabajo
 

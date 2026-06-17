@@ -42,8 +42,10 @@ Decision actual del usuario:
 - El backend FastAPI se desplegara en Vercel mediante funciones Python compatibles con ASGI.
 - La arquitectura sera serverless.
 - Las imagenes de productos se almacenaran en Cloudinary usando su plan gratuito.
-- No existe base de datos Neon creada.
-- No existe repositorio GitHub creado.
+- La base de datos Neon ya fue creada y probada mediante `DATABASE_URL`.
+- El repositorio GitHub ya fue creado y conectado.
+- El proyecto Vercel ya fue vinculado con GitHub.
+- Cloudinary ya fue probado mediante SDK Python.
 - La URL final aun no esta definida.
 
 Reglas tecnicas confirmadas:
@@ -146,6 +148,12 @@ assets/
 tests/
 deployment/
 ```
+
+Estado actual:
+
+- La estructura inicial del repositorio ya fue creada.
+- El diseno definitivo de base de datos esta en `docs/08-diseno-base-datos.md`.
+- La implementacion de backend y frontend aun no ha iniciado.
 
 ## Consideraciones de seguridad
 

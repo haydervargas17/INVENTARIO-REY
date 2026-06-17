@@ -1,6 +1,8 @@
 # Modelo de Datos Inicial
 
-Este modelo incorpora las decisiones confirmadas por el usuario. Aun no debe implementarse hasta cerrar las preguntas tecnicas restantes marcadas al final.
+Este modelo incorpora las decisiones confirmadas por el usuario y sirvio como base de analisis.
+
+El diseno definitivo implementable para PostgreSQL esta en `docs/08-diseno-base-datos.md`.
 
 ## Entidades iniciales
 

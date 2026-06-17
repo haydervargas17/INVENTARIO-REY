@@ -91,8 +91,8 @@ Este documento registra las respuestas dadas por el usuario y las dudas que aun 
 4. El frontend usara React, TypeScript, JavaScript y CSS.
 5. La base de datos sera Neon PostgreSQL.
 6. La arquitectura sera serverless.
-7. No hay base de datos Neon creada.
-8. No hay repositorio GitHub creado.
+7. La base de datos Neon ya fue creada y probada.
+8. El repositorio GitHub ya fue creado y conectado.
 9. La URL final aun no esta definida.
 
 ## Imagenes - confirmado
@@ -118,4 +118,4 @@ No hay preguntas de negocio pendientes para el modulo inicial de inventario de c
 
 ## Siguiente objetivo recomendado
 
-Disenar la base de datos definitiva del modulo de calzado y preparar la estructura inicial del repositorio.
+Implementar la base del backend FastAPI con configuracion, conexion a Neon, SQLAlchemy y Alembic.
