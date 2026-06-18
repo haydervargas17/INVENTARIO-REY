@@ -55,6 +55,8 @@ Estado:
 - `DATABASE_URL` guardado en `.env` local.
 - Conexion local probada correctamente.
 - Vercel tiene variables de Neon creadas por la integracion.
+- Migracion inicial aplicada correctamente.
+- Tablas creadas: `users`, `colors`, `products`, `inventory_items`, `inventory_item_colors`, `inventory_movements`, `audit_logs`, `revoked_tokens`.
 
 ## Cloudinary
 

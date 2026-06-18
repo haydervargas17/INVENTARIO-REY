@@ -46,6 +46,18 @@ Verificar Alembic:
 python -m alembic current
 ```
 
+Aplicar migraciones:
+
+```powershell
+python -m alembic upgrade head
+```
+
+Ejecutar seeds iniciales:
+
+```powershell
+python -m backend.app.database.seed
+```
+
 ## Documentacion
 
 La documentacion principal esta en [docs/README.md](docs/README.md).

@@ -118,4 +118,4 @@ No hay preguntas de negocio pendientes para el modulo inicial de inventario de c
 
 ## Siguiente objetivo recomendado
 
-Implementar modelos SQLAlchemy y primera migracion Alembic del modulo de calzado.
+Implementar autenticacion base: hashing, JWT, login, logout, revocacion de token y seed real de `system_admin`.

@@ -1,0 +1,18 @@
+DEFAULT_COLORS: tuple[str, ...] = (
+    "Negro",
+    "Blanco",
+    "Gris",
+    "Azul",
+    "Rojo",
+    "Verde",
+    "Beige",
+    "Cafe",
+    "Camel",
+    "Crema",
+    "Amarillo",
+    "Naranja",
+    "Rosado",
+    "Morado",
+    "Multicolor",
+    "Otro",
+)

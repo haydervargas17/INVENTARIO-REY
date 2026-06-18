@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.py"
+    }
+  ],
+  "functions": {
+    "api/index.py": {
+      "excludeFiles": "{.env,.env.*,cloudinary_integration_test.py,docs/**,frontend/**,tests/**,database/**,deployment/**,assets/**}"
+    }
+  }
+}

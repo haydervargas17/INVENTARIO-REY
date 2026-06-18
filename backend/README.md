@@ -26,6 +26,9 @@ Implementado:
 - Health check de API.
 - Health check de base de datos.
 - Configuracion inicial de Alembic.
+- Modelos SQLAlchemy iniciales del modulo de calzado.
+- Migracion inicial aplicada en Neon.
+- Seed modular de colores y usuario `system_admin`.
 - Entrypoints ASGI para Vercel: `app.py` y `api/index.py`.
 
 ## Ejecutar localmente
@@ -43,3 +46,16 @@ python -m uvicorn backend.app.main:app --reload
 python -m compileall app.py backend api
 python -m alembic current
 ```
+
+## Migraciones y seeds
+
+```powershell
+python -m alembic upgrade head
+python -m backend.app.database.seed
+```
+
+El seed de `system_admin` requiere:
+
+- `SYSTEM_ADMIN_USERNAME`
+- `SYSTEM_ADMIN_PASSWORD`
+- `SYSTEM_ADMIN_FULL_NAME`
