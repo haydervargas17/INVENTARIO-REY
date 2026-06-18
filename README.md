@@ -4,7 +4,7 @@ Sistema web de gestion de inventario para El Rey de los Zapatos.
 
 ## Estado
 
-Proyecto en fase de diseno y preparacion inicial.
+Proyecto en desarrollo inicial del backend.
 
 Completado:
 
@@ -15,10 +15,14 @@ Completado:
 - Conexion probada con Cloudinary.
 - Diseno definitivo de base de datos del modulo de calzado.
 - Estructura inicial del repositorio.
+- Modelos SQLAlchemy y migracion inicial Alembic.
+- Seed inicial de colores y usuario `system_admin`.
+- Autenticacion JWT con logout y revocacion de token.
+- Endpoints base de catalogos, productos e inventario.
 
 Siguiente objetivo:
 
-- Implementar modelos SQLAlchemy y primera migracion Alembic del modulo de calzado.
+- Implementar salidas, ajustes e historial de movimientos de inventario.
 
 ## Backend local
 
@@ -42,6 +46,12 @@ Endpoints base:
 - `POST /api/v1/auth/login`
 - `POST /api/v1/auth/logout`
 - `GET /api/v1/auth/me`
+- `GET /api/v1/catalogs/colors`
+- `GET /api/v1/products`
+- `POST /api/v1/products`
+- `PATCH /api/v1/products/{product_id}`
+- `GET /api/v1/inventory`
+- `POST /api/v1/inventory/entries`
 
 Verificar Alembic:
 
@@ -67,6 +77,13 @@ Autenticacion:
 - El token JWT dura 8 horas.
 - Logout revoca el token usando `jti`.
 - Las rutas protegidas rechazan tokens revocados.
+
+Inventario:
+
+- La entrada de inventario crea la referencia si no existe.
+- Si ya existe la misma referencia, talla, combinacion de colores y ubicacion, suma unidades.
+- `color_signature` se genera automaticamente desde colores normalizados.
+- Las cantidades no se editan directamente; se modifican por movimientos.
 
 ## Documentacion
 

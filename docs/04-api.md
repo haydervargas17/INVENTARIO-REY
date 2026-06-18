@@ -120,7 +120,7 @@ Reglas confirmadas:
 - La busqueda debe permitir encontrar referencias por descripcion.
 - Debe distinguir inventario en bodega e inventario en tienda.
 
-### POST `/api/v1/inventory`
+### POST `/api/v1/inventory/entries`
 
 Registra una nueva existencia o entrada de producto.
 
@@ -141,7 +141,10 @@ Request preliminar:
   "color_ids": ["uuid-negro", "uuid-blanco"],
   "location_type": "WAREHOUSE",
   "location_detail": "A-01",
-  "quantity": 3
+  "quantity": 3,
+  "purchase_unit_price": 100000,
+  "sale_unit_price": 180000,
+  "reason": "Ingreso de mercancia"
 }
 ```
 
@@ -154,6 +157,15 @@ Reglas confirmadas:
 - `color_signature` se generara automaticamente, ordenando y normalizando los colores seleccionados.
 - `color_signature` no se recibira como campo editable desde el frontend.
 - La ubicacion fisica sera texto libre y se debe distinguir bodega o tienda.
+
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Crea la referencia cuando no existe.
+- Suma unidades cuando ya existe la misma referencia, talla, combinacion de colores y ubicacion.
+- Actualiza automaticamente precios vigentes de la referencia cuando se registra una entrada.
+- Crea movimiento `IN`.
+- Crea auditoria `INVENTORY_IN`.
 
 ### POST `/api/v1/inventory/{inventory_item_id}/entries`
 
@@ -249,6 +261,12 @@ Reglas:
 
 Lista productos.
 
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Permite busqueda por referencia, nombre, marca y descripcion.
+- Soporta `limit` y `offset`.
+
 ### POST `/api/v1/products`
 
 Crea producto base.
@@ -257,6 +275,23 @@ Reglas confirmadas:
 
 - El administrador podra crear nuevas referencias.
 - Campos obligatorios: referencia, marca, descripcion, foto, talla, color, cantidad, ubicacion, precio de entrada y precio de venta.
+
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Crea referencia base.
+- Rechaza referencia duplicada.
+- Registra auditoria `CREATE`.
+
+### PATCH `/api/v1/products/{product_id}`
+
+Actualiza campos permitidos de una referencia.
+
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Permite actualizar nombre, marca, descripcion, foto, `cloudinary_public_id`, precios vigentes y estado activo.
+- Registra auditoria `UPDATE`.
 
 ### POST `/api/v1/products/{product_id}/image`
 
@@ -297,6 +332,11 @@ Reglas:
 ### GET `/api/v1/catalogs/colors`
 
 Lista colores controlados.
+
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Lista los 16 colores iniciales activos.
 
 ### GET `/api/v1/catalogs/location-types`
 

@@ -118,4 +118,4 @@ No hay preguntas de negocio pendientes para el modulo inicial de inventario de c
 
 ## Siguiente objetivo recomendado
 
-Implementar modulo base de productos, colores e inventario: schemas, repositorios, servicios y endpoints iniciales.
+Implementar salidas, ajustes manuales e historial de movimientos de inventario.
