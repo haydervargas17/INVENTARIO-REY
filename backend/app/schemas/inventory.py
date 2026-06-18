@@ -34,6 +34,10 @@ class InventoryMovementResponse(BaseModel):
     purchase_unit_price: int | None
     sale_unit_price: int | None
     reason: str
+    created_at: str
+    user_id: UUID
+    username: str | None = None
+    user_full_name: str | None = None
 
 
 class InventoryItemResponse(BaseModel):
@@ -50,5 +54,26 @@ class InventoryItemResponse(BaseModel):
 
 
 class InventoryEntryResponse(BaseModel):
+    inventory_item: InventoryItemResponse
+    movement: InventoryMovementResponse
+
+
+class InventoryExitRequest(BaseModel):
+    quantity: int = Field(gt=0)
+    reason: str = Field(default="Venta", min_length=1)
+
+
+class InventoryAdjustmentRequest(BaseModel):
+    quantity_delta: int
+    reason: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def ensure_non_zero_delta(self) -> "InventoryAdjustmentRequest":
+        if self.quantity_delta == 0:
+            raise ValueError("El ajuste no puede ser cero.")
+        return self
+
+
+class InventoryMovementActionResponse(BaseModel):
     inventory_item: InventoryItemResponse
     movement: InventoryMovementResponse

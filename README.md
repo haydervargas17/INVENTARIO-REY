@@ -19,10 +19,11 @@ Completado:
 - Seed inicial de colores y usuario `system_admin`.
 - Autenticacion JWT con logout y revocacion de token.
 - Endpoints base de catalogos, productos e inventario.
+- Salidas por venta, ajustes manuales e historial de movimientos.
 
 Siguiente objetivo:
 
-- Implementar salidas, ajustes e historial de movimientos de inventario.
+- Implementar carga de imagenes a Cloudinary desde el backend.
 
 ## Backend local
 
@@ -52,6 +53,9 @@ Endpoints base:
 - `PATCH /api/v1/products/{product_id}`
 - `GET /api/v1/inventory`
 - `POST /api/v1/inventory/entries`
+- `POST /api/v1/inventory/{inventory_item_id}/exits`
+- `POST /api/v1/inventory/{inventory_item_id}/adjustments`
+- `GET /api/v1/inventory/{inventory_item_id}/movements`
 
 Verificar Alembic:
 
@@ -84,6 +88,9 @@ Inventario:
 - Si ya existe la misma referencia, talla, combinacion de colores y ubicacion, suma unidades.
 - `color_signature` se genera automaticamente desde colores normalizados.
 - Las cantidades no se editan directamente; se modifican por movimientos.
+- Las salidas por venta no permiten dejar stock negativo.
+- Los ajustes manuales pueden ser positivos o negativos, pero no pueden dejar stock negativo.
+- El historial muestra fecha, usuario, tipo de movimiento, cantidades, precios y motivo.
 
 ## Documentacion
 

@@ -118,4 +118,4 @@ No hay preguntas de negocio pendientes para el modulo inicial de inventario de c
 
 ## Siguiente objetivo recomendado
 
-Implementar salidas, ajustes manuales e historial de movimientos de inventario.
+Implementar carga de imagenes a Cloudinary desde el backend.

@@ -151,3 +151,23 @@ class InventoryRepository:
         )
         self.db.add(movement)
         return movement
+
+    def list_movements(
+        self,
+        *,
+        inventory_item_id: UUID,
+        limit: int = 50,
+        offset: int = 0,
+    ) -> list[InventoryMovement]:
+        stmt = (
+            select(InventoryMovement)
+            .options(joinedload(InventoryMovement.user))
+            .where(
+                InventoryMovement.inventory_item_id == inventory_item_id,
+                InventoryMovement.deleted_at.is_(None),
+            )
+            .order_by(InventoryMovement.created_at.desc())
+            .limit(limit)
+            .offset(offset)
+        )
+        return list(self.db.scalars(stmt))

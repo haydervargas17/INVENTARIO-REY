@@ -169,7 +169,7 @@ Estado implementado:
 
 ### POST `/api/v1/inventory/{inventory_item_id}/entries`
 
-Registra entrada de unidades a una existencia.
+Pendiente de implementacion como endpoint separado. La entrada actual se realiza mediante `POST /api/v1/inventory/entries`, que crea o suma a la existencia correspondiente segun referencia, talla, colores y ubicacion.
 
 Request preliminar:
 
@@ -212,6 +212,15 @@ Reglas:
 - Debe crear movimiento.
 - Debe crear auditoria.
 
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Resta unidades de la existencia.
+- Rechaza la operacion si no hay stock suficiente.
+- Guarda el precio de venta vigente como precio historico del movimiento.
+- Crea movimiento `OUT`.
+- Crea auditoria `INVENTORY_OUT`.
+
 ### PATCH `/api/v1/inventory/{inventory_item_id}`
 
 Actualiza datos permitidos de una existencia.
@@ -245,6 +254,15 @@ Reglas:
 - El motivo es obligatorio.
 - Debe registrar fecha, usuario, cantidad anterior, cambio realizado y nueva cantidad.
 - Debe crear auditoria.
+
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Acepta ajustes positivos o negativos.
+- Rechaza `quantity_delta = 0`.
+- Rechaza ajustes que dejen inventario negativo.
+- Crea movimiento `ADJUSTMENT`.
+- Crea auditoria `INVENTORY_ADJUSTMENT`.
 
 ### DELETE `/api/v1/inventory/{inventory_item_id}`
 
@@ -326,6 +344,13 @@ Lista historial de entradas, salidas y ajustes de una existencia.
 Reglas:
 
 - Debe incluir fecha, usuario, tipo de movimiento, cantidad anterior, cantidad nueva, precio registrado y motivo.
+
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Lista movimientos por existencia.
+- Ordena por fecha descendente.
+- Retorna fecha, usuario, tipo, cantidad anterior, cambio, cantidad nueva, precios y motivo.
 
 ## Catalogos
 

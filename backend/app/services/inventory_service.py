@@ -7,12 +7,20 @@ from backend.app.repositories.audit_repository import AuditRepository
 from backend.app.repositories.color_repository import ColorRepository
 from backend.app.repositories.inventory_repository import InventoryRepository
 from backend.app.repositories.product_repository import ProductRepository
-from backend.app.schemas.inventory import InventoryEntryRequest
+from backend.app.schemas.inventory import (
+    InventoryAdjustmentRequest,
+    InventoryEntryRequest,
+    InventoryExitRequest,
+)
 from backend.app.utils.colors import build_color_signature
 
 
 class InventoryValidationError(Exception):
     """Raised when inventory business rules are violated."""
+
+
+class InventoryItemNotFoundError(Exception):
+    """Raised when an inventory item is not found."""
 
 
 class InventoryService:
@@ -40,6 +48,23 @@ class InventoryService:
             location_type=location_type,
             available_only=available_only,
             low_stock_only=low_stock_only,
+            limit=limit,
+            offset=offset,
+        )
+
+    def list_movements(
+        self,
+        *,
+        inventory_item_id: UUID,
+        limit: int = 50,
+        offset: int = 0,
+    ) -> list[InventoryMovement]:
+        item = self.inventory.get_by_id(inventory_item_id)
+        if item is None:
+            raise InventoryItemNotFoundError("Inventory item not found.")
+
+        return self.inventory.list_movements(
+            inventory_item_id=inventory_item_id,
             limit=limit,
             offset=offset,
         )
@@ -119,6 +144,99 @@ class InventoryService:
             metadata={
                 "reference": product.reference,
                 "quantity_delta": payload.quantity,
+                "previous_quantity": previous_quantity,
+                "new_quantity": new_quantity,
+            },
+        )
+        self.db.commit()
+        self.db.refresh(item)
+        self.db.refresh(movement)
+        return item, movement
+
+    def register_exit(
+        self,
+        inventory_item_id: UUID,
+        payload: InventoryExitRequest,
+        user_id: UUID,
+    ) -> tuple[InventoryItem, InventoryMovement]:
+        item = self.inventory.get_by_id(inventory_item_id)
+        if item is None:
+            raise InventoryItemNotFoundError("Inventory item not found.")
+
+        if item.quantity < payload.quantity:
+            raise InventoryValidationError("No hay unidades suficientes para registrar la salida.")
+
+        previous_quantity = item.quantity
+        new_quantity = previous_quantity - payload.quantity
+        item.quantity = new_quantity
+        item.updated_by = user_id
+
+        movement = self.inventory.create_movement(
+            inventory_item_id=item.id,
+            movement_type=MovementType.OUT,
+            quantity_delta=-payload.quantity,
+            previous_quantity=previous_quantity,
+            new_quantity=new_quantity,
+            purchase_unit_price=None,
+            sale_unit_price=item.product.current_sale_price,
+            reason=payload.reason,
+            user_id=user_id,
+        )
+        self.audit_logs.create(
+            action=AuditAction.INVENTORY_OUT,
+            user_id=user_id,
+            entity_name="inventory_items",
+            entity_id=item.id,
+            metadata={
+                "reference": item.product.reference,
+                "quantity_delta": -payload.quantity,
+                "previous_quantity": previous_quantity,
+                "new_quantity": new_quantity,
+                "sale_unit_price": item.product.current_sale_price,
+            },
+        )
+        self.db.commit()
+        self.db.refresh(item)
+        self.db.refresh(movement)
+        return item, movement
+
+    def register_adjustment(
+        self,
+        inventory_item_id: UUID,
+        payload: InventoryAdjustmentRequest,
+        user_id: UUID,
+    ) -> tuple[InventoryItem, InventoryMovement]:
+        item = self.inventory.get_by_id(inventory_item_id)
+        if item is None:
+            raise InventoryItemNotFoundError("Inventory item not found.")
+
+        previous_quantity = item.quantity
+        new_quantity = previous_quantity + payload.quantity_delta
+        if new_quantity < 0:
+            raise InventoryValidationError("El ajuste no puede dejar inventario negativo.")
+
+        item.quantity = new_quantity
+        item.updated_by = user_id
+
+        movement = self.inventory.create_movement(
+            inventory_item_id=item.id,
+            movement_type=MovementType.ADJUSTMENT,
+            quantity_delta=payload.quantity_delta,
+            previous_quantity=previous_quantity,
+            new_quantity=new_quantity,
+            purchase_unit_price=None,
+            sale_unit_price=None,
+            reason=payload.reason,
+            user_id=user_id,
+        )
+        self.audit_logs.create(
+            action=AuditAction.INVENTORY_ADJUSTMENT,
+            user_id=user_id,
+            entity_name="inventory_items",
+            entity_id=item.id,
+            metadata={
+                "reference": item.product.reference,
+                "quantity_delta": payload.quantity_delta,
                 "previous_quantity": previous_quantity,
                 "new_quantity": new_quantity,
             },

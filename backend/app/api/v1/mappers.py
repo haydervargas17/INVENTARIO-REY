@@ -1,4 +1,4 @@
-from backend.app.models import Color, InventoryItem, InventoryItemColor, InventoryMovement, Product
+from backend.app.models import Color, InventoryItem, InventoryMovement, Product
 from backend.app.schemas.catalog import ColorResponse
 from backend.app.schemas.inventory import (
     InventoryItemResponse,
@@ -60,4 +60,8 @@ def map_inventory_movement(movement: InventoryMovement) -> InventoryMovementResp
         purchase_unit_price=movement.purchase_unit_price,
         sale_unit_price=movement.sale_unit_price,
         reason=movement.reason,
+        created_at=movement.created_at.isoformat(),
+        user_id=movement.user_id,
+        username=movement.user.username if movement.user else None,
+        user_full_name=movement.user.full_name if movement.user else None,
     )
