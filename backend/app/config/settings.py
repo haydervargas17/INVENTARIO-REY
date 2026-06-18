@@ -29,6 +29,10 @@ class Settings(BaseSettings):
 
     frontend_url: str = Field(default="http://localhost:5173", alias="FRONTEND_URL")
 
+    system_admin_username: str | None = Field(default=None, alias="SYSTEM_ADMIN_USERNAME")
+    system_admin_password: str | None = Field(default=None, alias="SYSTEM_ADMIN_PASSWORD")
+    system_admin_full_name: str | None = Field(default=None, alias="SYSTEM_ADMIN_FULL_NAME")
+
     @field_validator("jwt_secret_key")
     @classmethod
     def validate_jwt_secret_key(cls, value: str) -> str:

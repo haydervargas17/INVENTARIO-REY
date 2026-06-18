@@ -29,6 +29,9 @@ Implementado:
 - Modelos SQLAlchemy iniciales del modulo de calzado.
 - Migracion inicial aplicada en Neon.
 - Seed modular de colores y usuario `system_admin`.
+- Autenticacion JWT.
+- Login, logout y `me`.
+- Revocacion de token en logout.
 - Entrypoints ASGI para Vercel: `app.py` y `api/index.py`.
 
 ## Ejecutar localmente
@@ -59,3 +62,9 @@ El seed de `system_admin` requiere:
 - `SYSTEM_ADMIN_USERNAME`
 - `SYSTEM_ADMIN_PASSWORD`
 - `SYSTEM_ADMIN_FULL_NAME`
+
+## Endpoints de autenticacion
+
+- `POST /api/v1/auth/login`
+- `POST /api/v1/auth/logout`
+- `GET /api/v1/auth/me`

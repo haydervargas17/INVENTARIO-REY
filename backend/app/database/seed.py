@@ -1,8 +1,7 @@
-import os
-
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from backend.app.config import get_settings
 from backend.app.core.constants import DEFAULT_COLORS
 from backend.app.database import SessionLocal
 from backend.app.models import Color, User, UserRole
@@ -32,9 +31,10 @@ def seed_colors(db: Session) -> int:
 
 
 def seed_system_admin(db: Session) -> bool:
-    username = os.getenv("SYSTEM_ADMIN_USERNAME")
-    password = os.getenv("SYSTEM_ADMIN_PASSWORD")
-    full_name = os.getenv("SYSTEM_ADMIN_FULL_NAME")
+    settings = get_settings()
+    username = settings.system_admin_username
+    password = settings.system_admin_password
+    full_name = settings.system_admin_full_name
 
     if not username or not password or not full_name:
         return False

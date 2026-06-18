@@ -87,6 +87,17 @@ Reglas:
 - Las rutas protegidas deben rechazar tokens cuyo `jti` este revocado.
 - Al cerrar sesion o expirar el token, el usuario debera autenticarse nuevamente.
 
+### GET `/api/v1/auth/me`
+
+Retorna el usuario autenticado segun el token Bearer enviado.
+
+Reglas:
+
+- Requiere token valido.
+- Rechaza tokens expirados.
+- Rechaza tokens revocados.
+- Retorna `id`, `username`, `full_name` y `role`.
+
 ## Inventario
 
 ### GET `/api/v1/inventory`

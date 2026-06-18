@@ -39,6 +39,9 @@ Endpoints base:
 - `GET /`
 - `GET /api/v1/health`
 - `GET /api/v1/health/database`
+- `POST /api/v1/auth/login`
+- `POST /api/v1/auth/logout`
+- `GET /api/v1/auth/me`
 
 Verificar Alembic:
 
@@ -57,6 +60,13 @@ Ejecutar seeds iniciales:
 ```powershell
 python -m backend.app.database.seed
 ```
+
+Autenticacion:
+
+- El login usa `username` y contrasena.
+- El token JWT dura 8 horas.
+- Logout revoca el token usando `jti`.
+- Las rutas protegidas rechazan tokens revocados.
 
 ## Documentacion
 

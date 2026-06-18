@@ -67,6 +67,11 @@ Estado:
 - Subida de imagen de prueba ejecutada correctamente.
 - URL optimizada generada correctamente.
 - Variables cargadas en Vercel Production.
+- Autenticacion probada en Production:
+  - Login exitoso.
+  - Consulta `/auth/me` exitosa.
+  - Logout exitoso.
+  - Token revocado rechazado con `401`.
 
 ## Regla de seguridad
 
