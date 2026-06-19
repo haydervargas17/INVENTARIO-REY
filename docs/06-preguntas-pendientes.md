@@ -118,4 +118,4 @@ No hay preguntas de negocio pendientes para el modulo inicial de inventario de c
 
 ## Siguiente objetivo recomendado
 
-Implementar carga de imagenes a Cloudinary desde el backend.
+Implementar frontend inicial en React.

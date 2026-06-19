@@ -1,18 +1,19 @@
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile, status
 from sqlalchemy.orm import Session
 
 from backend.app.api.dependencies import get_current_user
 from backend.app.api.v1.mappers import map_product
 from backend.app.database import get_db
 from backend.app.models import User
-from backend.app.schemas.product import ProductCreate, ProductUpdate
+from backend.app.schemas.product import ProductCreate, ProductImageUploadResponse, ProductUpdate
 from backend.app.services.product_service import (
     ProductConflictError,
     ProductNotFoundError,
     ProductService,
 )
+from backend.app.services.cloudinary_service import ImageUploadError
 
 router = APIRouter(prefix="/products", tags=["products"])
 
@@ -77,5 +78,45 @@ def update_product(
         "success": True,
         "message": "Referencia actualizada.",
         "data": map_product(product).model_dump(mode="json"),
+        "errors": None,
+    }
+
+
+@router.post("/{product_id}/image", status_code=status.HTTP_201_CREATED)
+def upload_product_image(
+    product_id: UUID,
+    image: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> dict[str, object]:
+    try:
+        product, uploaded_image = ProductService(db).upload_product_image(
+            product_id=product_id,
+            file=image.file,
+            content_type=image.content_type,
+            user_id=current_user.id,
+        )
+    except ProductNotFoundError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Referencia no encontrada.") from exc
+    except ImageUploadError as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc)) from exc
+    finally:
+        image.file.close()
+
+    data = ProductImageUploadResponse(
+        product=map_product(product),
+        secure_url=uploaded_image.secure_url,
+        optimized_url=uploaded_image.optimized_url,
+        public_id=uploaded_image.public_id,
+        width=uploaded_image.width,
+        height=uploaded_image.height,
+        format=uploaded_image.format,
+        file_size=uploaded_image.file_size,
+    )
+
+    return {
+        "success": True,
+        "message": "Imagen de referencia cargada.",
+        "data": data.model_dump(mode="json"),
         "errors": None,
     }

@@ -315,6 +315,13 @@ Estado implementado:
 
 Carga la imagen principal de una referencia.
 
+Request:
+
+- `multipart/form-data`
+- Campo obligatorio: `image`
+- Formatos permitidos: JPG, PNG o WebP.
+- Tamano maximo: 4 MB.
+
 Reglas:
 
 - La imagen sera capturada desde dispositivo movil o seleccionada desde el equipo del administrador.
@@ -324,6 +331,17 @@ Reglas:
 - La base de datos guardara la URL de la imagen principal.
 - El sistema podra guardar el `cloudinary_public_id` para futuras actualizaciones o eliminaciones logicas.
 - Las credenciales de Cloudinary se configuraran mediante variables de entorno.
+
+Estado implementado:
+
+- Ruta protegida por JWT.
+- Sube la imagen a Cloudinary.
+- Usa `public_id` deterministico por referencia: `inventario-rey/products/{referencia}/main`.
+- Sobrescribe la imagen principal si ya existe.
+- Genera URL optimizada con `f_auto` y `q_auto`.
+- Actualiza `photo_url` y `cloudinary_public_id` del producto.
+- Registra auditoria `UPDATE`.
+- Retorna dimensiones, formato, tamano, URL segura y URL optimizada.
 
 ## Auditoria
 

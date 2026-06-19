@@ -72,3 +72,16 @@ class ProductRepository:
         product.current_sale_price = sale_price
         product.updated_by = user_id
         return product
+
+    def update_image(
+        self,
+        product: Product,
+        *,
+        photo_url: str,
+        cloudinary_public_id: str,
+        user_id: UUID | None,
+    ) -> Product:
+        product.photo_url = photo_url
+        product.cloudinary_public_id = cloudinary_public_id
+        product.updated_by = user_id
+        return product

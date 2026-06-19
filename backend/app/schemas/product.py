@@ -36,3 +36,14 @@ class ProductResponse(BaseModel):
     current_purchase_price: int
     current_sale_price: int
     is_active: bool
+
+
+class ProductImageUploadResponse(BaseModel):
+    product: ProductResponse
+    secure_url: str
+    optimized_url: str
+    public_id: str
+    width: int
+    height: int
+    format: str
+    file_size: int

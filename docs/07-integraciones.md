@@ -67,11 +67,17 @@ Estado:
 - Subida de imagen de prueba ejecutada correctamente.
 - URL optimizada generada correctamente.
 - Variables cargadas en Vercel Production.
-- Autenticacion probada en Production:
-  - Login exitoso.
-  - Consulta `/auth/me` exitosa.
-  - Logout exitoso.
-  - Token revocado rechazado con `401`.
+- Endpoint backend implementado: `POST /api/v1/products/{product_id}/image`.
+- La API carga imagenes JPG, PNG o WebP de hasta 4 MB.
+- La API guarda `photo_url` con `f_auto` y `q_auto`.
+- La API guarda `cloudinary_public_id` para futuras actualizaciones.
+
+Pruebas realizadas:
+
+- Subida real de imagen temporal a Cloudinary.
+- Actualizacion de producto temporal con URL optimizada.
+- Eliminacion de la imagen temporal en Cloudinary despues de la prueba.
+- Rollback confirmado en Neon para no dejar producto temporal.
 
 ## Regla de seguridad
 

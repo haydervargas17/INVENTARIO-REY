@@ -20,10 +20,11 @@ Completado:
 - Autenticacion JWT con logout y revocacion de token.
 - Endpoints base de catalogos, productos e inventario.
 - Salidas por venta, ajustes manuales e historial de movimientos.
+- Carga de imagenes de productos a Cloudinary desde el backend.
 
 Siguiente objetivo:
 
-- Implementar carga de imagenes a Cloudinary desde el backend.
+- Implementar frontend inicial en React.
 
 ## Backend local
 
@@ -51,6 +52,7 @@ Endpoints base:
 - `GET /api/v1/products`
 - `POST /api/v1/products`
 - `PATCH /api/v1/products/{product_id}`
+- `POST /api/v1/products/{product_id}/image`
 - `GET /api/v1/inventory`
 - `POST /api/v1/inventory/entries`
 - `POST /api/v1/inventory/{inventory_item_id}/exits`
@@ -91,6 +93,13 @@ Inventario:
 - Las salidas por venta no permiten dejar stock negativo.
 - Los ajustes manuales pueden ser positivos o negativos, pero no pueden dejar stock negativo.
 - El historial muestra fecha, usuario, tipo de movimiento, cantidades, precios y motivo.
+
+Imagenes:
+
+- Las imagenes se cargan a Cloudinary mediante el backend.
+- El endpoint acepta imagenes JPG, PNG o WebP de hasta 4 MB.
+- La URL guardada en `photo_url` usa transformaciones `f_auto` y `q_auto`.
+- El `cloudinary_public_id` se guarda para futuras actualizaciones.
 
 ## Documentacion
 
