@@ -13,7 +13,10 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui']
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        street: ['Hanken Grotesk', 'ui-sans-serif', 'system-ui'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular'],
+        blackletter: ['Pirata One', 'serif']
       }
     },
   },
