@@ -1,5 +1,7 @@
 const TOKEN_KEY = 'invelrey_token'
 
+export { TOKEN_KEY }
+
 export function setToken(token: string) {
   localStorage.setItem(TOKEN_KEY, token)
 }

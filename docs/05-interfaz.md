@@ -35,6 +35,13 @@ Acciones:
 
 No debe existir registro publico.
 
+Estado implementado:
+
+- Pantalla React con diseno visual inicial.
+- Login conectado a `POST /api/v1/auth/login`.
+- Guarda Access Token en `localStorage`.
+- Redirige al panel de inventario al iniciar sesion.
+
 ### Inventario
 
 Objetivo:
@@ -51,6 +58,13 @@ Elementos:
 - Alerta de stock bajo.
 - Acciones de entrada y salida.
 - Accion para ver historial de movimientos.
+
+Estado implementado:
+
+- Dashboard con cards de existencias.
+- Resumen de unidades totales, stock bajo, bodega y tienda.
+- Muestra foto, referencia, marca, cantidad, talla, colores, ubicacion y precios.
+- Acciones por existencia: entrada, salida, ajuste e historial.
 
 Columnas preliminares:
 
@@ -92,6 +106,13 @@ Reglas:
 - Al registrar nuevos precios, el sistema actualizara automaticamente los precios vigentes de la referencia.
 - El campo de colores generara internamente una combinacion normalizada para evitar duplicados por orden de seleccion.
 
+Estado implementado:
+
+- Modal conectado a `POST /api/v1/inventory/entries`.
+- Usa catalogo controlado de colores desde `/api/v1/catalogs/colors`.
+- Usa referencias existentes desde `/api/v1/products`.
+- Permite actualizar precios al registrar una entrada.
+
 ### Registro de salida
 
 Objetivo:
@@ -109,6 +130,10 @@ Reglas visibles:
 - No permitir salida mayor a la disponibilidad actual.
 - Mostrar que toda salida se registra como venta.
 
+Estado implementado:
+
+- Modal conectado a `POST /api/v1/inventory/{inventory_item_id}/exits`.
+
 ### Ajuste de inventario
 
 Objetivo:
@@ -125,6 +150,10 @@ Reglas visibles:
 - No permitir ajuste en `0`.
 - No permitir que un ajuste negativo deje cantidad menor que `0`.
 - Registrar automaticamente fecha, usuario y cambio realizado.
+
+Estado implementado:
+
+- Modal conectado a `POST /api/v1/inventory/{inventory_item_id}/adjustments`.
 
 ### Auditoria
 
@@ -153,6 +182,11 @@ Columnas preliminares:
 - Precio de entrada.
 - Precio de venta.
 - Motivo.
+
+Estado implementado:
+
+- Modal conectado a `GET /api/v1/inventory/{inventory_item_id}/movements`.
+- Muestra tipo, motivo, delta, cantidad anterior, cantidad nueva, fecha y usuario.
 
 ### Catalogos
 
@@ -213,6 +247,16 @@ flowchart TD
 - Estados de carga.
 - Estados vacios.
 - Componente de error.
+
+Componentes implementados:
+
+- `Layout`.
+- `Modal`.
+- `ProductForm`.
+- `InventoryEntryForm`.
+- `InventoryExitForm`.
+- `InventoryAdjustmentForm`.
+- `InventoryMovements`.
 
 ## Validaciones frontend
 

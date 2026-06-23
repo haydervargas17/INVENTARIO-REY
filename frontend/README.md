@@ -1,23 +1,8 @@
-# Frontend (implementación inicial)
-
-Plantilla inicial con Vite + TypeScript + TailwindCSS y páginas base.
-
-Pasos para ejecutar:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Variables de entorno (opcional):
-
-- `VITE_API_BASE_URL` — URL base de la API (por defecto `/api/v1`).
 # Frontend
 
-Aplicacion web del sistema de inventario.
+Aplicacion web inicial del sistema de inventario.
 
-Stack previsto:
+Stack:
 
 - React.
 - TypeScript.
@@ -26,7 +11,29 @@ Stack previsto:
 - React Router.
 - Axios.
 - React Query.
-- Zod.
 - React Hook Form.
+- Framer Motion.
+
+## Ejecucion local
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Variables de entorno opcionales:
+
+- `VITE_API_BASE_URL`: URL base de la API. Por defecto usa `/api/v1`.
+
+En desarrollo, `vite.config.ts` redirige `/api` hacia `http://127.0.0.1:8000`.
+
+## Estado actual
+
+- Login conectado al backend.
+- Panel de inventario con cards.
+- Creacion de referencias con foto.
+- Registro de entradas, salidas y ajustes.
+- Historial de movimientos por existencia.
 
 La implementacion debe seguir los flujos y componentes definidos en `docs/05-interfaz.md`.

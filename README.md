@@ -4,7 +4,7 @@ Sistema web de gestion de inventario para El Rey de los Zapatos.
 
 ## Estado
 
-Proyecto en desarrollo inicial del backend.
+Proyecto en desarrollo inicial full-stack.
 
 Completado:
 
@@ -21,10 +21,13 @@ Completado:
 - Endpoints base de catalogos, productos e inventario.
 - Salidas por venta, ajustes manuales e historial de movimientos.
 - Carga de imagenes de productos a Cloudinary desde el backend.
+- Frontend inicial en React, TypeScript, Vite y TailwindCSS.
+- Login conectado a la API.
+- Panel de inventario con referencias, entradas, salidas, ajustes e historial.
 
 Siguiente objetivo:
 
-- Implementar frontend inicial en React.
+- Configurar despliegue conjunto frontend + backend en Vercel y ampliar filtros de inventario.
 
 ## Backend local
 
@@ -39,6 +42,23 @@ Ejecutar API local:
 ```powershell
 python -m uvicorn backend.app.main:app --reload
 ```
+
+## Frontend local
+
+Instalar dependencias:
+
+```powershell
+cd frontend
+npm install
+```
+
+Ejecutar interfaz local:
+
+```powershell
+npm run dev
+```
+
+El frontend usa `/api/v1` como URL base por defecto. En desarrollo, Vite redirige `/api` hacia `http://127.0.0.1:8000`.
 
 Endpoints base:
 
@@ -100,6 +120,15 @@ Imagenes:
 - El endpoint acepta imagenes JPG, PNG o WebP de hasta 4 MB.
 - La URL guardada en `photo_url` usa transformaciones `f_auto` y `q_auto`.
 - El `cloudinary_public_id` se guarda para futuras actualizaciones.
+
+Frontend:
+
+- Login con usuario y contrasena.
+- Logout llama al backend para revocar token y luego limpia la sesion local.
+- Creacion de referencias con foto.
+- Registro de entradas usando colores controlados y talla europea decimal.
+- Registro de salidas y ajustes desde cada existencia.
+- Vista de historial de movimientos por existencia.
 
 ## Documentacion
 

@@ -7,5 +7,11 @@ html, body, #root {
 }
 
 body {
-  @apply bg-gray-50 text-gray-900;
+  @apply bg-gray-50 text-gray-900 font-sans;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.btn-shadow {
+  box-shadow: 0 6px 18px rgba(16,24,40,0.08);
 }

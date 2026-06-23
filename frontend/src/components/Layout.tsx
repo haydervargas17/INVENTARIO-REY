@@ -1,25 +1,39 @@
-import React from 'react'
 import { Outlet, Link } from 'react-router-dom'
+import api from '../services/api'
 import { clearToken, getToken } from '../services/auth'
 
 export default function Layout() {
-  function logout() {
-    clearToken()
-    window.location.href = '/login'
+  async function logout() {
+    try {
+      await api.post('/auth/logout')
+    } catch {
+      // The local session must end even if the network request fails.
+    } finally {
+      clearToken()
+      window.location.href = '/login'
+    }
   }
 
   return (
-    <div className="min-h-screen">
-      <header className="bg-white shadow">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h2 className="font-bold">InvElRey</h2>
-          <nav>
-            <Link to="/" className="mr-4">Inventario</Link>
-            {getToken() ? <button onClick={logout} className="text-sm text-red-600">Cerrar sesión</button> : <Link to="/login">Login</Link>}
+    <div className="min-h-screen bg-slate-100">
+      <header className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+          <h2 className="font-extrabold tracking-tight">InvElRey</h2>
+          <nav className="flex items-center gap-4 text-sm">
+            <Link to="/" className="font-medium text-slate-700 hover:text-slate-950">
+              Inventario
+            </Link>
+            {getToken() ? (
+              <button onClick={logout} className="font-medium text-red-600 hover:text-red-700">
+                Cerrar sesión
+              </button>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
           </nav>
         </div>
       </header>
-      <main className="max-w-6xl mx-auto p-4">
+      <main className="mx-auto max-w-6xl p-4">
         <Outlet />
       </main>
     </div>
