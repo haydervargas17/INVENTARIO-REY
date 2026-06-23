@@ -18,7 +18,7 @@ export default function Layout() {
     <div className="min-h-screen bg-slate-100">
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-          <h2 className="font-extrabold tracking-tight">InvElRey</h2>
+          <h2 className="font-extrabold tracking-tight">KING URBAN</h2>
           <nav className="flex items-center gap-4 text-sm">
             <Link to="/" className="font-medium text-slate-700 hover:text-slate-950">
               Inventario

@@ -35,7 +35,7 @@ export default function Login() {
       <div className="fixed inset-0 z-[100] login-grain-overlay" aria-hidden="true" />
 
       <header className="sticky top-0 z-50 flex w-full items-center justify-between border-b-2 border-[#84967e] bg-[#131313]/80 px-5 py-4 backdrop-blur-md md:px-16">
-        <div className="font-blackletter text-4xl uppercase tracking-tight text-[#e5e2e1] md:text-5xl">InvElRey</div>
+        <div className="font-blackletter text-4xl uppercase tracking-tight text-[#e5e2e1] md:text-5xl">KING URBAN</div>
         <div className="flex items-center gap-4 md:gap-6">
           <span className="hidden font-mono text-xs uppercase text-[#b9ccb2] md:inline">Sistema interno</span>
           <span className="border-b-2 border-[#00e639] font-mono text-xs font-bold uppercase text-[#00e639]">Acceso</span>
@@ -147,7 +147,7 @@ export default function Login() {
                 disabled={isSubmitting}
                 className="group login-btn-hover-shift login-text-distressed relative w-full overflow-hidden bg-[#00ff41] py-6 font-blackletter text-4xl uppercase tracking-wider text-[#007117] transition-all active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <span className="relative z-10">{isSubmitting ? 'Validando' : 'Inicializar_enlace'}</span>
+                <span className="relative z-10">{isSubmitting ? 'VALIDANDO' : 'INICIAR SESION'}</span>
                 <span className="absolute inset-0 -translate-x-full skew-x-12 bg-white/10 transition-transform duration-500 group-hover:translate-x-full" aria-hidden="true" />
               </button>
             </div>
@@ -177,10 +177,10 @@ export default function Login() {
 
       <footer className="flex w-full flex-col items-center justify-between gap-4 border-t-2 border-[#84967e] bg-[#0e0e0e] px-5 py-6 md:flex-row md:px-16">
         <div className="flex flex-col items-center gap-3 md:flex-row md:gap-6">
-          <div className="origin-left scale-75 font-blackletter text-5xl text-[#e5e2e1]">InvElRey</div>
+          <div className="origin-left scale-75 font-blackletter text-5xl text-[#e5e2e1]">KING URBAN</div>
           <p className="font-mono text-xs uppercase text-[#b4b5b5]">Sistema interno de inventario. Acceso restringido.</p>
         </div>
-        <p className="font-mono text-xs uppercase text-[#b4b5b5]">Sin registro publico · sin recuperacion publica</p>
+        <p className="font-mono text-xs uppercase text-[#b4b5b5]">Sin registro publico - sin recuperacion publica</p>
       </footer>
     </div>
   )

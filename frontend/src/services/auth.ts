@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'invelrey_token'
+const TOKEN_KEY = 'kingurban_token'
 
 export { TOKEN_KEY }
 

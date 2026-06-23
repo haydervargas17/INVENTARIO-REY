@@ -19,7 +19,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem('invelrey_token')
+      localStorage.removeItem('kingurban_token')
       if (window.location.pathname !== '/login') {
         window.location.href = '/login'
       }
